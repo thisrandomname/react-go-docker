@@ -1,16 +1,19 @@
 SERVICE=backend	
 
-build-deps:
-	$(MAKE) -C ./$(SERVICE) MAKEFLAGS=build-deps
-
 push:
 	docker-compose push
 
-build:
+build: build-frontend
 	docker-compose build
 
-build-with-deps: build-deps
+build-with-deps: build-deps build-frontend
 	docker-compose build --no-cache
+
+build-deps:
+	$(MAKE) -C ./$(SERVICE) MAKEFLAGS=build-deps
+
+build-frontend:
+	$(MAKE) -C ./frontend MAKEFLAGS=build
 
 run: up
 

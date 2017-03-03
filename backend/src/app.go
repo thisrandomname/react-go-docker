@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/whimatthew/go-docker/backend/src/api"
+	"github.com/whimatthew/react-go-docker/backend/src/api"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 

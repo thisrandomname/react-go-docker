@@ -1,8 +1,6 @@
 frontend:
   restart: always
   build: ./frontend
-  environment:
-    - PORT=${PORT_UI_INTERNAL}
   expose:
     - ${PORT_UI_EXTERNAL}
   ports:

@@ -7,7 +7,7 @@ import (
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/whimatthew/go-docker/backend/src/api"
+	"github.com/whimatthew/react-go-docker/backend/src/api"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
