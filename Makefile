@@ -10,10 +10,10 @@ build-with-deps: build-deps build-frontend
 	docker-compose build --no-cache
 
 build-deps:
-	$(MAKE) -C ./$(SERVICE) MAKEFLAGS=build-deps
+	$(MAKE) -B -C ./backend MAKEFLAGS=build-deps
 
 build-frontend:
-	$(MAKE) -C ./frontend MAKEFLAGS=build
+	$(MAKE) -B -C ./frontend MAKEFLAGS=build
 
 run: up
 
@@ -30,6 +30,9 @@ down:
 restart:
 	docker-compose restart
 
+start-frontend:
+	$(MAKE) -B -C ./frontend MAKEFLAGS=start
+
 rm:
 	docker-compose rm -f
 
@@ -44,8 +47,13 @@ envs:
 enter:
 	docker-compose run $(SERVICE) /bin/sh
 
-test:
-	docker-compose run $(SERVICE) /bin/sh -c "go test ./test/..."
+test: test-frontend test-backend
+
+test-backend:
+	docker-compose run backend /bin/sh -c "go test ./test/..."
+
+test-frontend:
+	$(MAKE) -B -C ./frontend MAKEFLAGS=test
 
 test-local:
-	$(MAKE) -C ./$(SERVICE) MAKEFLAGS=test
+	$(MAKE) -B -C ./$(SERVICE) MAKEFLAGS=test
